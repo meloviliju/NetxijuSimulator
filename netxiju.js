@@ -27,9 +27,10 @@ const simulate = (person_num) => {
         alcohol: 0,
         position: 0,
         hasGoaled: false,
+        thrownBackNum: 0,
     }));
     while (true) {
-        for (let i = 0; i < person_num; i++) {
+        for (let i = 0; i < persons.length; i++) {
             const person = persons[i];
             if (person.hasGoaled) {
                 continue;
@@ -42,6 +43,16 @@ const simulate = (person_num) => {
             person.alcohol += alcoholTable[person.position];
             if (person.position === alcoholTable.length - 1) {
                 person.hasGoaled = true;
+            } else {
+                // かぶった人を振り出しへ
+                for (let j = 0; j < persons.length; j++){
+                    if (i===j){
+                        continue;
+                    } else if (persons[i].position === persons[j].position) {
+                        persons[j].position = 0;
+                        persons[j].thrownBackNum++;
+                    }
+                }
             }
             if (persons.every(p => p.hasGoaled)) {
                 return persons;
