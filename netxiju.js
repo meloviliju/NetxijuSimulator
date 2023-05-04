@@ -20,18 +20,20 @@ const oneperson = () => {
         ...three,
         ...three,
     ];
-    let alcohol = 0;
-    let position = 0;
+    const person = {
+        alcohol: 0,
+        position: 0
+    };
     while (true) {
         let xiju = getXiju();
-        if (position + xiju >= alcoholTable.length){
+        if (person.position + xiju >= alcoholTable.length) {
             continue;
         }
-        position += xiju;        
-        alcohol += alcoholTable[position];
-        if (position === alcoholTable.length-1) {
+        person.position += xiju;
+        person.alcohol += alcoholTable[person.position];
+        if (person.position === alcoholTable.length - 1) {
             break;
         }
     }
-    return alcohol;
+    return person.alcohol;
 }
